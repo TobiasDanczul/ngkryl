@@ -24,7 +24,7 @@ from netgen.geom2d import unit_square
 mesh = Mesh(unit_square.GenerateMesh(maxh = 0.01))
 fes = H1(mesh, order = 1, dirichlet = "left|right|top|bottom")
 
-u,v = fes.TnT()
+u, v = fes.TnT()
 
 M = BilinearForm(fes, symmetric = True)
 M +=  SymbolicBFI(u * v)
@@ -38,7 +38,7 @@ A.Assemble()
 rhs.Assemble()
 
 u = GridFunction(fes)
-u.vec.data = m.mat.Inverse(fes.FreeDofs(), inverse = "sparsecholesky") * rhs.vec
+u.vec.data = M.mat.Inverse(fes.FreeDofs(), inverse = "sparsecholesky") * rhs.vec
 ```
 After importing our module, we establish the matrix L = M^-1A whose (negative) fractional power we want to compute.
 ```python
