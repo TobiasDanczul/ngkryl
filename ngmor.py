@@ -415,7 +415,7 @@ class KrylovOperator:
     lam_max : float, optional
         The maximal eigenvalue of L.
     """
-    def __init__(self, vector, L, poletype = 'zpoles'):
+    def __init__(self, vector, L, poletype = 'zolohat'):
         
         self.vector = vector
         
@@ -433,7 +433,7 @@ class KrylovOperator:
         self.mat = L.get_A().CreateMatrix()
         self.mat_inverse = None
         
-        if poletype == "gpoles":
+        if poletype == "greedy":
             self.projector = Projector(L.get_freedofs(), True)
         
         # Create reduced basis
@@ -675,7 +675,7 @@ class KrylovOperator:
             n = k - 1
         
         # For efficiency, bura poles need to be computed in advance
-        if self.poletype == "bpoles":
+        if self.poletype == "bura":
             self.compute_bpoles(n)  
             
         with TaskManager():
@@ -750,31 +750,31 @@ class KrylovOperator:
         pole : float
             The jth pole (of the given order).
         """
-        if self.poletype == "zpoles":
+        if self.poletype == "zolo":
             pole = self.compute_zpole(j, order)
             
-        if self.poletype == "zhatpoles":
+        if self.poletype == "zolohat":
             pole = self.compute_zhatpole(j, order)
         
-        if self.poletype == "epoles":
+        if self.poletype == "eds":
             pole = self.compute_epole()
             
-        if self.poletype == "ehatpoles":
+        if self.poletype == "edshat":
             pole = self.compute_ehatpole()
             
-        if self.poletype == "apoles":
+        if self.poletype == "automatic":
             pole = self.compute_apole()
             
-        if self.poletype == "fpoles":
+        if self.poletype == "fully_automatic":
             pole = self.compute_fpole()
       
-        if self.poletype == "spoles":
+        if self.poletype == "spectral":
             pole = self.compute_spole()
             
-        if self.poletype == "gpoles":
+        if self.poletype == "greedy":
             pole = self.compute_gpole()
         
-        if self.poletype == "bpoles":
+        if self.poletype == "bura":
             pole = self.bpoles[j-1]
             
         if self.poletype == "polynomial":
