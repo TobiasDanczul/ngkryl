@@ -67,7 +67,8 @@ By default, the `KrylovOperator` class usese the Zolotarev poles on the negative
 - `eds`: The EDS poles on the negative spectral interval of L,
 - `edshat`: The EDS poles on the negative real line,
 - `automatic`: The automatic poles on the negative spectral interval of L,
-- `fully_automatic`: The fully automatic poles on the negative spectral interal of L.
+- `fully_automatic`: The fully automatic poles on the negative spectral interal of L,
+- `polynomial`: Infinite poles, yielding a polynomial Krylov space. 
 
 Provided a sufficiently fine training set, assigned to the operator using the `.set_trainset` method
 ```python
