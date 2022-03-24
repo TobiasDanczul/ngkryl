@@ -7,19 +7,16 @@ poles = poles_nested + poles_not_nested
 poles_on_spectrum = ["zolo", "eds", "automatic", "fully_automatic"]
 poles_on_R_neg = ["zolohat", "edshat", "bura"]
 
-
 nested = {}
 for p in poles_nested:
     nested[p] = True
 for p in poles_not_nested:
     nested[p] = False
-    
-    
+        
 # For EDS
 EDS_PARAM = 1/np.sqrt(2)
 
-
-# Newton Parameter for epole computation
+# Newton Parameter for eds computation
 newton_tolerance = 1e-12
 newton_maxit = 10000
 
